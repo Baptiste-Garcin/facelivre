@@ -5,7 +5,7 @@ School Project. The goal was to make a clone of Facebook. Friends and like featu
 == Install
 
 First run 'npm install' and 'bower install'.
-Run 'node app.js' to launch the chat.
+Run 'node bin/www' to launch the chat.
 Magic happens on 'localhost:3000'
 
 == Database info
