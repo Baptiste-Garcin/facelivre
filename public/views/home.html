@@ -1,0 +1,26 @@
+<div class="col-lg-10 col-lg-offset-1">
+<h2>While you were away...</h2>
+<div ng-controller="PostController">
+	<div class="panel panel-default">
+		<div class="panel-heading"><h4>What's new ?</h4></div>
+		<div class="panel-body">
+			<div class="input-group col-lg-12">
+				<textarea rows="4" class="form-control" placeholder="type your message" ng-model="postData.content" name="content"></textarea>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<div class="col-lg-10"></div>
+			<span class="input-group-btn button" id="comment-button">
+				<button type="button" class="btn btn-primary" ng-click="createComment(postData, result._fields[2].identity.low, result._fields[0].identity.low)">Post</button>
+			</span>
+		</div>
+	</div>
+</div>
+<div ng-controller="FeedController" ng-init="getPost()" >
+	<div ng-repeat="post in posts">
+		<div>
+			{{post._fields[0].properties.content}}
+		</div>
+	</div>
+</div>
+</div>

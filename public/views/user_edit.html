@@ -1,0 +1,80 @@
+<br><br>
+<div class="container-fluid well span6 col-lg-3" ng-init="showUser()">
+	<div class="row-fluid">
+		<div class="span2" >
+			<img src="https://secure.gravatar.com/avatar/de9b11d0f9c0569ba917393ed5e5b3ab?s=140&r=g&d=mm" class="img-circle">
+		</div>
+
+		<div class="span8">
+			<form>
+				<h3><input size="18" ng-model="postData.name" class="text-capitalize"/></h3>
+				<h6><input size="30" type="email" ng-model="postData.email"/></h6>
+
+				<h6 ng-if="address !== undefined"><input size="30" ng-model="postData.address" value="{{address}}"/></h6>
+				<h6 ng-if="address == undefined"><input size="30" ng-model="postData.address" placeholder="Please filled your address"/></h6>
+
+				<h6 ng-if="age !== undefined"><input size="30" type="date" ng-model="postData.birthdate"/></h6>
+				<h6 ng-if="age == undefined"><input size="30" type="date" ng-model="postData.birthdate" placeholder="Please filled your birthdate"/></h6>
+
+				<h6 ng-if="gender !== undefined"><input size="30" ng-model="postData.gender" value="{{gender}}"/></h6>
+				<h6 ng-if="gender == undefined"><input size="30" ng-model="postData.gender" placeholder="Please filled your gender"/></h6>
+
+				<h6 ng-if="religion !== undefined"><input size="30" ng-model="postData.religion" value="{{religion}}"/></h6>
+				<h6 ng-if="religion == undefined"><input size="30" ng-model="postData.religion" placeholder="Please filled your religion"/></h6>
+
+
+				<h6 ng-if="job !== undefined"><input size="30" ng-model="postData.job" value="{{job}}"/></h6>
+				<h6 ng-if="job == undefined"><input size="30" ng-model="postData.job" placeholder="Please filled your job"/></h6>
+
+				<h6 ng-if="studies !== undefined"><input size="30" ng-model="postData.studies" value="{{studies}}"/></h6>
+				<h6 ng-if="studies == undefined"><input size="30" ng-model="postData.studies" placeholder="Please filled your studies"/></h6>
+
+				<h6><input size="30" placeholder="Password" type="password" ng-model="postData.password"/></h6>
+				<h6><input size="30" placeholder="Password Confirmation" type="password" ng-model="postData.password_conf"/></h6>
+				<h4><a href="" ng-click="updateUser(postData)">Send</a></h4>
+			</form>
+			<h6><a href="#">More... </a></h6>
+			<h6><a ui-sref="profile({id:user.id})">Back</a></h6>
+
+		</div>
+	</div>
+</div>
+
+<div class="col-lg-9" ng-controller="PostController">
+	<div ng-if="user.id == params.id" class="panel panel-default">
+		<div class="panel-heading"><h4>What's new ?</h4></div>
+		<div class="panel-body">
+			<div class="input-group col-lg-12">
+				<textarea rows="4" class="form-control" placeholder="type your message" ng-model="postData.content" name="content"></textarea>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<div class="col-lg-10"></div>
+			<span class="input-group-btn button" id="post-button">
+				<button type="button" class="btn btn-primary" ng-click="createPost(postData)">Post</button>
+			</span>
+		</div>
+	</div>
+
+	<div ng-init="showPost()">
+		<div id="post" ng-repeat="result in contentProvider" class="panel panel-default">
+			<div class="panel-heading">Posted on {{ result._fields[1].properties.created_at | date:'MM/dd/yyyy @ H:m'}} by <a ui-sref="profile({id:result._fields[2].identity.low})">{{ result._fields[2].properties.firstname | capitalize}} {{ result._fields[2].properties.lastname | capitalize}}</a></div>
+			<div class="panel-body">{{ result._fields[0].properties.content }}</div>
+			<div class="panel-footer" ng-controller="CommentController" ng-init="getComment(result._fields[0].identity.low)">
+				<div ng-repeat="comment in commentProvider">
+					<a ui-sref="profile({id:comment._fields[3].identity.low})">{{ comment._fields[3].properties.firstname | capitalize}} {{ comment._fields[3].properties.lastname | capitalize}}</a> : {{ comment._fields[1].properties.content }}
+					<p>
+						{{ comment._fields[2].properties.created_at | date: 'MM/dd/yyyy @ H:m' }}
+					</p>
+				</div>
+				<div class="panel-footer">
+					<div class="input-group" ng-controller="CommentController">
+						<input type="text" class="form-control" placeholder="type your comment" ng-model="postData.content" name="content">
+						<span class="input-group-btn" id="post-button">
+							<button type="button" class="btn btn-primary" ng-click="createComment(postData, result._fields[2].identity.low, result._fields[0].identity.low)">Comment</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

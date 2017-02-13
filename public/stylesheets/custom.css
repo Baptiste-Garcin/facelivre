@@ -1,0 +1,44 @@
+.login-form-fields {
+	margin-top: 0px !important;
+	margin-right: 8px;
+	border-style: solid;
+	border-width: 2px;
+}
+
+.usersContainer {
+	z-index: 100;
+	position: absolute;
+	width: 100%;
+}
+
+.notifContainer {
+	z-index: 100;
+	position: absolute;
+	width: 150px;
+}
+
+.user {
+	width: 100%;
+	margin-bottom: 0px !important;
+}
+
+.notif {
+	margin-bottom: 0px !important;
+}
+
+.captitalize {
+	text-transform: capitalize;
+}
+
+.heartAlign {
+	padding-top: 0px;
+}
+
+.badgeAlignP {
+	padding-top: 6px;
+}
+
+.badgeAlignC {
+	margin-top: 6px;
+	padding-top: 6px;
+}

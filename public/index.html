@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html ng-app="FaceLivre">
+<head>
+    <meta charset="utf-8">
+    <title>FaceLivre</title>
+    <link href="./libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./stylesheets/custom.css" rel="stylesheet" />
+    <script src="./libs/angular/angular.min.js"></script>
+
+
+    <!-- <base href="/"> -->
+
+</head>
+<body ng-cloak>
+    <nav ng-controller="AuthController" class="navbar navbar-default test">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" ui-sref="home">FaceLivre</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="home">Home</a></li>
+            </ul>
+            <div ng-controller="searchbarController" class="col-sm-3 col-md-3">
+                <form class="navbar-form">
+                    <div class="input-group">
+                        <input type="text" class="navbar-form login-form-fields searchbar form-control" placeholder="Search user" ng-show="signedIn" ng-model="input" ng-change="autocomplete()">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit" ng-click="search(input)"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+
+                    </div>
+                    <div class="usersContainer">
+                        <div ng-repeat="user in records" class="list-group user">
+                            <p class="list-group-item" ng-click="profile(user._fields[0].identity.low)">
+                                {{user._fields[0].properties.firstname | capitalize}} {{user._fields[0].properties.lastname | capitalize}}
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="login" ng-hide="signedIn">Login</a></li>
+                <li><a ui-sref="register" ng-hide="signedIn">Register</a></li>
+                <li><a ui-sref="profile({id:user.id})" ng-show="signedIn">My Profile</a></li>
+                <li ng-controller="NotifController"><a ng-click="displayNotif()" class="glyphicon glyphicon-star-empty"></a>
+                    <div class="notifContainer">
+                        <div ng-repeat="notif in notifContainer track by $index" class="list-group notif">
+                            <div ng-if="notif._fields[1].type == 'IS_FRIENDS_WITH'" class="notif">
+                                <div class="list-group-item">
+                                    <div>
+                                        {{notif._fields[2].properties.firstname | capitalize}} {{notif._fields[2].properties.lastname | capitalize}} asked you as a friend
+                                    </div>
+                                    <a ng-click="friendAccept(notif._fields[0].identity.low, notif._fields[2].identity.low)" class="glyphicon glyphicon-ok"></a>
+                                    <a ng-click="friendDenied(notif._fields[0].identity.low, notif._fields[2].identity.low)" class="glyphicon glyphicon-remove pull-right"></a>
+                                </div>
+
+                            </div>
+                            <div ng-if="notif._fields[1].type == 'LIKES'">
+                                <p class="list-group-item" ng-click="read(notif._fields[1].identity.low)">
+                                    {{notif._fields[0].properties.firstname | capitalize}}
+                                    {{notif._fields[0].properties.lastname | capitalize}} like your {{notif._fields[2].labels[0]}} containing "{{notif._fields[2].properties.content}}"
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- <li><a class="glyphicon glyphicon-star-empty"></a></li> -->
+                <li><a ui-sref="logout" ng-click="logout()" ng-show="signedIn">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <ui-view ng-cloak></ui-view>
+    </div>
+
+    <script src="./libs/jquery/dist/jquery.min.js"></script>
+    <script src="./libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./libs/angular-route/angular-route.min.js"></script>
+    <script src="./libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="./libs/ngstorage/ngStorage.min.js"></script>
+<!--     <script src="./libs/ng-file-upload/ng-file-upload-shim.min.js"></script>
+    <script src="./libs/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="./libs/ng-img-crop/source/js/ng-img-crop.js"></script> -->
+    <script src="./javascripts/app.js"></script>
+
+    <script src="./javascripts/services/auth.service.js"></script>
+    <script src="./javascripts/services/post.service.js"></script>
+    <script src="./javascripts/services/user.service.js"></script>
+    <script src="./javascripts/services/comment.service.js"></script>
+    <script src="./javascripts/services/search.service.js"></script>
+    <script src="./javascripts/services/like.service.js"></script>
+    <script src="./javascripts/services/friend.service.js"></script>
+    <script src="./javascripts/services/notif.service.js"></script>
+    <script src="./javascripts/services/feed.service.js"></script>
+
+
+    <script src="./javascripts/controllers/postController.js"></script>
+    <script src="./javascripts/controllers/userController.js"></script>
+    <script src="./javascripts/controllers/authController.js"></script>
+    <script src="./javascripts/controllers/feedController.js"></script>
+    <script src="./javascripts/controllers/searchbarController.js"></script>
+    <script src="./javascripts/controllers/commentController.js"></script>
+    <script src="./javascripts/controllers/likeController.js"></script>
+    <script src="./javascripts/controllers/friendController.js"></script>
+    <script src="./javascripts/controllers/notifController.js"></script>
+    <script src="./javascripts/controllers/feedController.js"></script>
+
+
+
+
+</body>
+</html>

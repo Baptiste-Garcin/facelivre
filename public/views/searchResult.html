@@ -1,0 +1,9 @@
+<br><br>
+<h3>Search result</h3>
+<div id="post" ng-repeat="result in results" class="panel panel-default">
+    <div class="panel-heading"><a ui-sref="profile({id:result._fields[0].identity.low})">{{ result._fields[0].properties.firstname | capitalize }} {{ result._fields[0].properties.lastname | capitalize }}</a></div>
+    <div class="panel-body">
+        <p>{{ result._fields[0].properties.job }}</p>
+        <p>{{ result._fields[0].properties.studies }}</p>
+    </div>
+</div>
