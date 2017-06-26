@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title>FaceLivre</title>
-    <link href="./libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./stylesheets/custom.css" rel="stylesheet" />
-    <script src="./libs/angular/angular.min.js"></script>
+    <script src="/modules/angular/angular.min.js"></script>
 
 
     <!-- <base href="/"> -->
@@ -42,7 +42,10 @@
                 <li><a ui-sref="login" ng-hide="signedIn">Login</a></li>
                 <li><a ui-sref="register" ng-hide="signedIn">Register</a></li>
                 <li><a ui-sref="profile({id:user.id})" ng-show="signedIn">My Profile</a></li>
-                <li ng-controller="NotifController"><a ng-click="displayNotif()" class="glyphicon glyphicon-star-empty"></a>
+                <li ng-controller="NotifController">
+                  <a ng-show="notif.length == 0" class="glyphicon glyphicon-star-empty">{{test}}</a>
+                  <a ng-show="notif.length != 0" ng-click="displayNotif()" class="glyphicon glyphicon-star">{{test}}</a>
+
                     <div class="notifContainer">
                         <div ng-repeat="notif in notifContainer track by $index" class="list-group notif">
                             <div ng-if="notif._fields[1].type == 'IS_FRIENDS_WITH'" class="notif">
@@ -64,7 +67,6 @@
                         </div>
                     </div>
                 </li>
-                <!-- <li><a class="glyphicon glyphicon-star-empty"></a></li> -->
                 <li><a ui-sref="logout" ng-click="logout()" ng-show="signedIn">Logout</a></li>
             </ul>
         </div>
@@ -73,11 +75,11 @@
         <ui-view ng-cloak></ui-view>
     </div>
 
-    <script src="./libs/jquery/dist/jquery.min.js"></script>
-    <script src="./libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="./libs/angular-route/angular-route.min.js"></script>
-    <script src="./libs/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="./libs/ngstorage/ngStorage.min.js"></script>
+    <script src="/modules/jquery/dist/jquery.min.js"></script>
+    <script src="/modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/modules/angular-route/angular-route.min.js"></script>
+    <script src="/modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/modules/ngstorage/ngStorage.min.js"></script>
 <!--     <script src="./libs/ng-file-upload/ng-file-upload-shim.min.js"></script>
     <script src="./libs/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="./libs/ng-img-crop/source/js/ng-img-crop.js"></script> -->

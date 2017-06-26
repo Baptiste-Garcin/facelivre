@@ -7,7 +7,7 @@ app.factory('NotifService', function($http, $stateParams){
                 data: {data:id}
             }).then(function(res){
                 callback(res);
-            });
+            })
         },
         read : function(arg, callback){
             $http({
@@ -15,6 +15,9 @@ app.factory('NotifService', function($http, $stateParams){
                 url: '/api/notif/' + arg
             }).then(function(res){
                 callback(res);
+            })
+            .catch(function(err){
+              console.log('err');
             });
         },
         friendAccept : function(ask, answer, callback){

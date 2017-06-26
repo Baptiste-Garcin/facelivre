@@ -5,7 +5,7 @@ var driver = neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "ch
 
 module.exports.getSession = function(request){
     if(request.neo4jSession)
-        return request.neo4jSession;
+          return request.neo4jSession;
     else
     {
         request.neo4jSession = driver.session();

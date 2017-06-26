@@ -15,8 +15,8 @@ module.exports.getAllNotif = function(req, res)
 module.exports.read = function(req, res)
 {
     Notif.read(req, function(result){
-        res.status(200).json({success:true, messsage:"notif read"});
-    });
+          res.status(200).json({success:true, messsage:"notif read"});
+    })
 };
 
 // module.exports.friendAccept = function(req, res)

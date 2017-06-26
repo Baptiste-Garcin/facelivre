@@ -6,10 +6,8 @@ app.controller('NotifController', ['$interval', '$scope', '$rootScope', 'AuthSer
     function getNotif(){
         $scope.user = AuthService.currentUser();
         NotifService.fetch($scope.user.id, function(res){
-
             for(var i = 0; i < res.data.result.friendsRequest.records.length; i++)
                 $scope.notif.push(res.data.result.friendsRequest.records[i]);
-
             for(var j = 0; j < res.data.result.like.records.length; j++)
                 $scope.notif.push(res.data.result.like.records[j]);
         });
@@ -41,6 +39,8 @@ app.controller('NotifController', ['$interval', '$scope', '$rootScope', 'AuthSer
             getNotif();
             $scope.notifContainer = $scope.notif;
             $scope.open = true;
+        }, function(err){
+          console.log(err);
         });
     };
 

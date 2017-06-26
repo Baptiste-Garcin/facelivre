@@ -27,14 +27,15 @@ module.exports.getFriendRequestNotif = function(req, callback){
 };
 
 module.exports.read = function(req, callback){
+    console.log(typeof parseInt(req.params.id));
     var session = db.getSession(req);
-    session.run('MATCH (a)-[r]-(b) WHERE ID(r) = {id} SET r.notified = "true"', {id:parseInt(req.params.id)})
+    session.run('MATCH (a)-[r]-(b) WHERE ID(r) = {id} SET r.notified = "true" RETURN a', {id: require('neo4j-driver').v1.int(parseInt(req.params.id))})
     .then(function(result){
         callback(result);
     })
-    .catch(function(result){
-        callback({success:false, message:'Something wen\'t wrong'});
-    });
+    .catch(function(err){
+      console.log(err);
+    })
 };
 
 module.exports.accept = function(req, callback){
