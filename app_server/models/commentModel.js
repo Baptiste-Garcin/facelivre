@@ -21,7 +21,7 @@ module.exports.commentGet = function(req, postId, callback)
 {
 	var session = db.getSession(req);
 	session
-	.run('MATCH (p:Post)<-[r1:RELATES_TO]-(c:Comment)-[r2:WRITTEN_BY]->(u:Person) WHERE ID(p) = {postId} RETURN p,c,r2,u ORDER BY r.created_at DESC',
+	.run('MATCH (p:Post)<-[r1:RELATES_TO]-(c:Comment)-[r2:WRITTEN_BY]->(u:Person) WHERE ID(p) = {postId} RETURN p,c,r2,u ORDER BY c.created_at DESC',
 	{postId: postId})
 	.then(function(result)
 	{
