@@ -1,6 +1,6 @@
 var neo4j = require('neo4j-driver').v1;
 
-var driver = neo4j.driver("bolt://localhost:7687" || process.env.GRAPHENEDB_BOLT_URL, neo4j.auth.basic("neo4j" || process.env.GRAPHENEDB_BOLT_USER, "changeme" || process.env.GRAPHENEDB_BOLT_PASSWORD));
+var driver = neo4j.driver(process.env.GRAPHENEDB_BOLT_URL, neo4j.auth.basic(process.env.GRAPHENEDB_BOLT_USER, process.env.GRAPHENEDB_BOLT_PASSWORD));
 
 
 module.exports.getSession = function(request){
