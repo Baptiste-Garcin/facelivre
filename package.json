@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "startDev": "./node_modules/.bin/nodemon ./bin/www"
+    "startDev": "NODE_ENV=development ./node_modules/.bin/nodemon ./bin/www"
   },
   "dependencies": {
     "angular": "^1.6.4",
