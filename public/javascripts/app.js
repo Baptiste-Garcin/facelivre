@@ -30,7 +30,6 @@ app.config(["$locationProvider", '$urlRouterProvider', '$stateProvider', functio
     .state('home', {
         url: '/home',
         templateUrl: 'views/home.html',
-        controller: 'FeedController'
     })
     .state('profile', {
         url: '/user/:id',
