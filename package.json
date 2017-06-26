@@ -7,11 +7,9 @@
     "startDev": "./node_modules/.bin/nodemon ./bin/www"
   },
   "dependencies": {
-    "@uirouter/angularjs": "latest",
-    "@uirouter/visualizer": "latest",
     "angular": "^1.6.4",
     "angular-route": "^1.6.4",
-    "angular-router": "0.0.2",
+    "angular-ui-router": "^1.0.3",
     "body-parser": "~1.15.2",
     "bootstrap": "^3.3.7",
     "cookie-parser": "~1.4.3",
